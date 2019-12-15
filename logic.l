@@ -15,15 +15,16 @@ newline [\n]
 ws      {delim}+
 letter  [A-Za-z]
 digit   [0-9]
+quit    ["E" | "Q"]
 id      {letter}({letter}|{digit})*
 number  {digit}+(\.{digit}+)?(E[+-]?{digit}+)?
-quit    ["exit" | "quit"]
+
 %%
 
 {delim}	; // ignore all whitespace
-{quit}		{return LQUIT;}
+{quit}		    {return LQUIT;}
 {number} 	    {yylval.fval = atof(yytext); return NUMBER;}
-{id}            {yylval.idval = (yytext); return ID;}
+{id}            {yylval.idval = strdup(yytext); return ID;}
 {newline} {return NEWLINE;}
 "+"		{return LPLUS;}
 "-"		{return LMINUS;}
@@ -33,14 +34,17 @@ quit    ["exit" | "quit"]
 ")"		{return LRIGHT;}
 "<"     {return LT;}
 "<="    {return LE;}
+":="    {return AG;}
+"="    {return AG;}
 "=="    {return EQ;}
 "!="    {return NE;} 
 ">"     {return GT;}
-">="    {return GE; }
+">="    {return GE;}
 "¬"     {return NOT;}
 "&"     {return AND;}
-"||"     {return OR;}
+"||"    {return OR;}
 "->"    {return THEN;}
 "<-->"  {return IFF;}
+
 
 %%

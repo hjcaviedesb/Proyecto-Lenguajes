@@ -62,11 +62,14 @@ extern int yydebug;
     OR = 272,
     THEN = 273,
     IFF = 274,
-    LPLUS = 275,
-    LMINUS = 276,
-    LMULTIPLY = 277,
-    LDIVIDE = 278,
-    UMINUS = 279
+    AG = 275,
+    TRUE = 276,
+    FALSE3 = 277,
+    LPLUS = 278,
+    LMINUS = 279,
+    LMULTIPLY = 280,
+    LDIVIDE = 281,
+    UMINUS = 282
   };
 #endif
 
@@ -75,14 +78,14 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 13 "logic.y" /* yacc.c:1909  */
+#line 15 "logic.y" /* yacc.c:1909  */
 
 	int ival;
 	float fval;
-    char* idval;
+    char*idval;
  
 
-#line 86 "logic.tab.h" /* yacc.c:1909  */
+#line 89 "logic.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

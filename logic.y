@@ -2,6 +2,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include "langFunctions.h"
 
 extern int yylex();
 extern int yyparse();
@@ -13,23 +15,19 @@ void yyerror(const char* s);
 %union {
 	int ival;
 	float fval;
-    char* idval;
+    char*idval;
  }
 
-%token NUMBER 
-%token ID
-%token LQUIT
-%token NEWLINE
-%token LLEFT LRIGHT
-%token LT LE EQ NE GT GE
-%token NOT AND OR THEN IFF 
+%token NUMBER ID LQUIT NEWLINE LLEFT LRIGHT LT LE EQ NE GT GE NOT AND OR THEN IFF AG
+%token TRUE FALSE3
 %left LPLUS LMINUS
 %left LMULTIPLY LDIVIDE
+%right NOT
 %right UMINUS
 
 %type <idval> ID
-%type <fval> expr NUMBER 
-%type <fval> atom biconditional conditional conjunction disjunction literal
+%type <fval> expr NUMBER group
+%type <fval> atom biconditional conditional conjunction disjunction literal atomString
 %start calculation
 
 %%
@@ -41,8 +39,13 @@ calculation:
 lines: NEWLINE
     | expr NEWLINE {printf("\tResult: %f\n", $1); }
     | LQUIT NEWLINE {printf("bye!\n"); exit(0); }
-    | biconditional NEWLINE{printf("\tResult: %f\n",$1);}
+    | biconditional NEWLINE{printResult($1);}
+    | assign NEWLINE
+    | ID NEWLINE {printResult(searchValue(searchIdentifier($1)));}
 ;
+
+assign: 
+    ID AG NUMBER {storeIdentifier($1,$3);}
 
 expr:
     expr LPLUS expr {$$ = $1 + $3;} 
@@ -55,16 +58,18 @@ expr:
 ;
 
 biconditional:
-    conditional IFF biconditional {$$ = $1 + $3;} 
-    | conditional 
+    conditional IFF biconditional {$$ = checkBiconditional($1,$3);} 
+    | conditional
+    | group 
 ;
+
 conditional:
-    conjunction THEN conditional {$$ = $1 / $3;} 
+    conjunction THEN conditional { $$ = checkConditional($1,$3); } 
     | conjunction
 ;
 
 conjunction:
-    disjunction OR conjunction {$$ = $1 ||  $3;} 
+    disjunction OR conjunction {$$ = $1 || $3;} 
     | disjunction
 ;
 
@@ -76,19 +81,28 @@ literal:
 
     atom {$$ = $1;}
     | NOT atom {$$ = !$2;}
+    | atomString {$$ = $1;}
+    | NOT atomString {$$ = !$2;}
 ;
 atom:
-    NUMBER 
+    NUMBER | group
+; 
+
+atomString:
+    ID {$$ = searchValue(searchIdentifier($1));}
+    | group
 ;
-//group:
-//    LLEFT biconditional LRIGHT | "{" biconditional "}" | "["biconditional"]" 
-//;
 
 
-
-
+group:
+    LLEFT biconditional LRIGHT {$$ = $2;}
+    | "{" biconditional "}" {$$ = $2;} 
+    | "["biconditional"]" {$$ = $2;}
+;
 
 %%
+
+
 
 int main() {
 	yyin = stdin;
@@ -104,5 +118,3 @@ void yyerror(const char* s) {
 	fprintf(stderr, "Parse error: %s\n", s);
 	exit(1);
 }
-
-void 

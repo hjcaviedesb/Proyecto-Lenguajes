@@ -1,4 +1,3 @@
-
 all: logic
 
 logic.tab.c logic.tab.h:logic.y
