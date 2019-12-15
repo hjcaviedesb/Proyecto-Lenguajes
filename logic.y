@@ -13,7 +13,7 @@ void yyerror(const char* s);
 %union {
 	int ival;
 	float fval;
-    char* *idval;
+    char* idval;
  }
 
 %token NUMBER 
@@ -27,8 +27,9 @@ void yyerror(const char* s);
 %left LMULTIPLY LDIVIDE
 %right UMINUS
 
+%type <idval> ID
 %type <fval> expr NUMBER 
-%type <idval> ID atom biconditional conditional conjunction disjunction literal
+%type <fval> atom biconditional conditional conjunction disjunction literal
 %start calculation
 
 %%
@@ -40,7 +41,7 @@ calculation:
 lines: NEWLINE
     | expr NEWLINE {printf("\tResult: %f\n", $1); }
     | LQUIT NEWLINE {printf("bye!\n"); exit(0); }
-    | biconditional NEWLINE{printf("\tResult: %s\n",$1);}
+    | biconditional NEWLINE{printf("\tResult: %f\n",$1);}
 ;
 
 expr:
@@ -77,7 +78,7 @@ literal:
     | NOT atom {$$ = !$2;}
 ;
 atom:
-    ID 
+    NUMBER 
 ;
 //group:
 //    LLEFT biconditional LRIGHT | "{" biconditional "}" | "["biconditional"]" 
@@ -103,3 +104,5 @@ void yyerror(const char* s) {
 	fprintf(stderr, "Parse error: %s\n", s);
 	exit(1);
 }
+
+void 

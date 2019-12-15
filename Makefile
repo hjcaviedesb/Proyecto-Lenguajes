@@ -1,14 +1,14 @@
 
-all: calc
+all: logic
 
-calc.tab.c calc.tab.h:	calc.y
-	bison -d calc.y
+logic.tab.c logic.tab.h:logic.y
+	bison -d logic.y
 
-lex.yy.c: calc.l calc.tab.h
-	flex calc.l
+lex.yy.c: logic.l logic.tab.h
+	flex logic.l
 
-calc: lex.yy.c calc.tab.c calc.tab.h
-	gcc -o calc calc.tab.c lex.yy.c
+logic: lex.yy.c logic.tab.c logic.tab.h
+	gcc -o logic logic.tab.c lex.yy.c
 
 clean:
-	rm calc calc.tab.c lex.yy.c calc.tab.h
+	rm logic logic.tab.c lex.yy.c logic.tab.h

@@ -80,8 +80,9 @@ union YYSTYPE
 	int ival;
 	float fval;
     char* idval;
+ 
 
-#line 85 "logic.tab.h" /* yacc.c:1909  */
+#line 86 "logic.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;
