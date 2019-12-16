@@ -1292,7 +1292,7 @@ yyreduce:
 
   case 6:
 #line 41 "logic.y" /* yacc.c:1646  */
-    {printf("bye!\n"); exit(0); }
+    {printf("Adios!\n"); exit(0); }
 #line 1297 "logic.tab.c" /* yacc.c:1646  */
     break;
 
@@ -1657,6 +1657,11 @@ yyreturn:
 
 
 int main() {
+
+
+    printf("%s\n","Bienvenido al logic acá puede evualar expresiones de logica Proposicional.");
+    printf("%s\n","-Presione CTRL+C para salir o escriba Q y Enter");
+
 	yyin = stdin;
 
 	do {

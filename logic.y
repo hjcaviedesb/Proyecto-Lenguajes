@@ -38,7 +38,7 @@ calculation:
 
 lines: NEWLINE
     | expr END NEWLINE {printf("\tResult: %f\n", $1); }
-    | LQUIT  NEWLINE {printf("bye!\n"); exit(0); }
+    | LQUIT  NEWLINE {printf("Adios!\n"); exit(0); }
     | biconditional END NEWLINE{printResult($1);}
     | assign NEWLINE
     | ID END NEWLINE {printResult(searchValue(searchIdentifier($1)));}
@@ -105,6 +105,11 @@ group:
 
 
 int main() {
+
+
+    printf("%s\n","Bienvenido al logic acá puede evualar expresiones de logica Proposicional.");
+    printf("%s\n","-Presione CTRL+C para salir o escriba Q y Enter");
+
 	yyin = stdin;
 
 	do {

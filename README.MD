@@ -16,5 +16,12 @@ Analizador sintáctico-semántico para un lenguaje de lógica proposicional.Por 
 Para correr el programa es necesario contar con los requisitos mencionados anteriormente. En la linea de comandos se ejecuta el Makefile con el comando __make__, el ejecutar el comando se compilara el programa y generara el arhchivo binario __logic__, este se puede ejecutar con el comando __./logic__.
 
 ## Lenguaje Aceptado
-- Definición de Variable p = False/True;
-- Definicion de Expresión - p || q; (p||q); etc
+* Definición de Variable: 
+- p = False/True;
+* Definicion de Expresión:  
+- p || q;  
+- p & q; 
+- p -> q;
+- p <--> q; 
+- ¬p;
+- Se admiten (), [], y {}
