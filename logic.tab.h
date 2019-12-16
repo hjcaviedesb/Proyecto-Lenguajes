@@ -63,13 +63,12 @@ extern int yydebug;
     THEN = 273,
     IFF = 274,
     AG = 275,
-    TRUE = 276,
-    FALSE3 = 277,
-    LPLUS = 278,
-    LMINUS = 279,
-    LMULTIPLY = 280,
-    LDIVIDE = 281,
-    UMINUS = 282
+    END = 276,
+    LPLUS = 277,
+    LMINUS = 278,
+    LMULTIPLY = 279,
+    LDIVIDE = 280,
+    UMINUS = 281
   };
 #endif
 
@@ -85,7 +84,7 @@ union YYSTYPE
     char*idval;
  
 
-#line 89 "logic.tab.h" /* yacc.c:1909  */
+#line 88 "logic.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

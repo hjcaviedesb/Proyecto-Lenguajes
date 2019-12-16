@@ -19,7 +19,7 @@ void yyerror(const char* s);
  }
 
 %token NUMBER ID LQUIT NEWLINE LLEFT LRIGHT LT LE EQ NE GT GE NOT AND OR THEN IFF AG
-%token TRUE FALSE3
+%token END
 %left LPLUS LMINUS
 %left LMULTIPLY LDIVIDE
 %right NOT
@@ -37,15 +37,15 @@ calculation:
 ;
 
 lines: NEWLINE
-    | expr NEWLINE {printf("\tResult: %f\n", $1); }
-    | LQUIT NEWLINE {printf("bye!\n"); exit(0); }
-    | biconditional NEWLINE{printResult($1);}
+    | expr END NEWLINE {printf("\tResult: %f\n", $1); }
+    | LQUIT  NEWLINE {printf("bye!\n"); exit(0); }
+    | biconditional END NEWLINE{printResult($1);}
     | assign NEWLINE
-    | ID NEWLINE {printResult(searchValue(searchIdentifier($1)));}
+    | ID END NEWLINE {printResult(searchValue(searchIdentifier($1)));}
 ;
 
 assign: 
-    ID AG NUMBER {storeIdentifier($1,$3);}
+    ID AG ID END {storeIdentifier($1,$3);}
 
 expr:
     expr LPLUS expr {$$ = $1 + $3;} 

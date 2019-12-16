@@ -1,4 +1,4 @@
-# Proyecto Lenguejes de programación
+# Taller #2 Lenguajes de programación
 Analizador sintáctico-semántico para un lenguaje de lógica proposicional.Por el momento el analizador funciona con proposiciones simples a las cuales hay que definir su valor en un principio. Se esta trabajando para poder generar las tablas de verdad dado el caso en que no se encuentren los valores. 
 
 ## Archivos

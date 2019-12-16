@@ -45,6 +45,6 @@ number  {digit}+(\.{digit}+)?(E[+-]?{digit}+)?
 "||"    {return OR;}
 "->"    {return THEN;}
 "<-->"  {return IFF;}
-
+";"     {return END;}
 
 %%

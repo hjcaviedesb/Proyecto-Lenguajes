@@ -11,7 +11,17 @@ struct IdentifierStructure
 int numIdentifier = 0;
 
 
-void storeIdentifier(char* identifier, float value){
+void storeIdentifier(char* identifier, char* valueString){
+
+    int value = -1;
+
+    if(strcmp("False",valueString) == 0){
+        value = 0;
+    }
+
+    if(strcmp("True",valueString) == 0){
+        value = 1;
+    }
 
     identifiers[numIdentifier].value = value;
     identifiers[numIdentifier].id = identifier;
