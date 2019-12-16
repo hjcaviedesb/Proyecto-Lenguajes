@@ -89,7 +89,7 @@ atom:
 ; 
 
 atomString:
-    ID {$$ = searchValue(searchIdentifier($1));}
+    ID { if((searchIdentifier($1)) >= 0){ $$ = searchValue(searchIdentifier($1));}else{$$ = 0;}};
     | group
 ;
 

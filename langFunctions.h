@@ -11,6 +11,8 @@ struct IdentifierStructure
 int numIdentifier = 0;
 
 
+
+
 void storeIdentifier(char* identifier, char* valueString){
 
     int value = -1;
@@ -31,8 +33,7 @@ void storeIdentifier(char* identifier, char* valueString){
 
 int searchIdentifier(char* identifier){
 
-    for(int i = 0;i<20;i++){
-
+    for(int i = 0;i<numIdentifier;i++){
         if(strcmp(identifiers[i].id,identifier) == 0){
             return i;
         }

@@ -1400,7 +1400,7 @@ yyreduce:
 
   case 33:
 #line 92 "logic.y" /* yacc.c:1646  */
-    {(yyval.fval) = searchValue(searchIdentifier((yyvsp[0].idval)));}
+    { if((searchIdentifier((yyvsp[0].idval))) >= 0){ (yyval.fval) = searchValue(searchIdentifier((yyvsp[0].idval)));}else{(yyval.fval) = 0;}}
 #line 1405 "logic.tab.c" /* yacc.c:1646  */
     break;
 
